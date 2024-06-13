@@ -1,6 +1,7 @@
 package com.divyanshu.journalapp.service;
 
 import com.divyanshu.journalapp.entity.JournalEntry;
+import com.divyanshu.journalapp.entity.User;
 import com.divyanshu.journalapp.repository.JournalEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,17 @@ public class JournalEntryService {
         return journalEntryRepository.findAll();
     }
 
-    public Optional<JournalEntry> getJournalEntryById(ObjectId id) {
-        Optional<JournalEntry> new1 = journalEntryRepository.findById(id);
-        System.out.println(new1);
-        return new1;
+    public List<JournalEntry> getJournalEntriesByUserName(User user) {
+
+        List<JournalEntry> journalEntries = user.getJournalEntries();
+        return journalEntries;
     }
 
     public void deleteById(ObjectId id) {
         journalEntryRepository.deleteById(id);
+    }
+    public Optional<JournalEntry> findJournalById(ObjectId journalId) {
+        return journalEntryRepository.findById(journalId);
     }
 
 
